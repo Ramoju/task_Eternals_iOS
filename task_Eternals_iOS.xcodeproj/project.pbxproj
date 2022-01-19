@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D0AD86B279897FC00BB8EAE /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0AD86A279897FC00BB8EAE /* TaskDetailsViewController.swift */; };
 		3D1593AD27975A52008E0EE6 /* SubCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1593AC27975A52008E0EE6 /* SubCategoryListViewController.swift */; };
 		77093BA2278F7F35008BE710 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77093BA1278F7F35008BE710 /* AppDelegate.swift */; };
 		77093BA4278F7F35008BE710 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77093BA3278F7F35008BE710 /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D0AD86A279897FC00BB8EAE /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		3D1593AC27975A52008E0EE6 /* SubCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryListViewController.swift; sourceTree = "<group>"; };
 		77093B9E278F7F35008BE710 /* task_Eternals_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = task_Eternals_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77093BA1278F7F35008BE710 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D0AD867279896BF00BB8EAE /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		3D0AD868279896CC00BB8EAE /* view */ = {
+			isa = PBXGroup;
+			children = (
+				77093BA7278F7F35008BE710 /* Main.storyboard */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		3D0AD869279896D400BB8EAE /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3D1593AC27975A52008E0EE6 /* SubCategoryListViewController.swift */,
+				77093BA5278F7F35008BE710 /* ViewController.swift */,
+				3D0AD86A279897FC00BB8EAE /* TaskDetailsViewController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
 		77093B95278F7F35008BE710 = {
 			isa = PBXGroup;
 			children = (
@@ -101,14 +128,14 @@
 		77093BA0278F7F35008BE710 /* task_Eternals_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				3D0AD869279896D400BB8EAE /* controllers */,
+				3D0AD868279896CC00BB8EAE /* view */,
+				3D0AD867279896BF00BB8EAE /* models */,
 				77093BA1278F7F35008BE710 /* AppDelegate.swift */,
 				77093BA3278F7F35008BE710 /* SceneDelegate.swift */,
-				77093BA5278F7F35008BE710 /* ViewController.swift */,
-				77093BA7278F7F35008BE710 /* Main.storyboard */,
 				77093BAA278F7F36008BE710 /* Assets.xcassets */,
 				77093BAC278F7F36008BE710 /* LaunchScreen.storyboard */,
 				77093BAF278F7F36008BE710 /* Info.plist */,
-				3D1593AC27975A52008E0EE6 /* SubCategoryListViewController.swift */,
 			);
 			path = task_Eternals_iOS;
 			sourceTree = "<group>";
@@ -261,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D0AD86B279897FC00BB8EAE /* TaskDetailsViewController.swift in Sources */,
 				77093BA6278F7F35008BE710 /* ViewController.swift in Sources */,
 				3D1593AD27975A52008E0EE6 /* SubCategoryListViewController.swift in Sources */,
 				77093BA2278F7F35008BE710 /* AppDelegate.swift in Sources */,
