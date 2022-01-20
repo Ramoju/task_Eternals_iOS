@@ -37,7 +37,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" title="Category"/>
                                 <connections>
-                                    <action selector="addCategory:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BCF-g7-50B"/>
+                                    <action selector="addCategory" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Jt-pU-IaJ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uf2-Kv-Xt7">
@@ -73,7 +73,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="1lS-AP-Cb2"/>
                     <connections>
-                        <outlet property="addCatBtn" destination="f05-mr-TeE" id="8f2-yN-B3p"/>
                         <outlet property="categoryTv" destination="v2g-fp-omI" id="q9c-Is-XdF"/>
                     </connections>
                 </viewController>
