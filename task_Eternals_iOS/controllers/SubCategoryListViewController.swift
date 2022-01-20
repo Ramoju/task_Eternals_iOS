@@ -9,11 +9,17 @@ import UIKit
 
 class SubCategoryListViewController: UIViewController {
 
+    @IBOutlet weak var categoryName2: UILabel!
+    
+    var categoryName: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        categoryName2.text=categoryName
     }
+    
+    
     
 
     /*
