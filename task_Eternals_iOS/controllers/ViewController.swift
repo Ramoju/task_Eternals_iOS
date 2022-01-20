@@ -6,17 +6,24 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
     
-    var categories = ["Books", "Groceries", "Shopping-List", "Movies"]
+    //var categories = ["Books", "Groceries", "Shopping-List", "Movies"]
+    var categories:[String] = []
+    var details:[NSManagedObject] = []
+    
     @IBOutlet weak var categoryTv: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        tableView.register(UINib(nibName:"CategoryTableViewCell", bundle: nil), forCellReuseIdentifier:"categories")
         categoryTv.delegate=self
         categoryTv.dataSource=self
+        showCategories()
         categoryTv.reloadData()
     }
     
@@ -46,22 +53,61 @@ class ViewController: UIViewController {
             guard let name = catName.text, !name.isEmpty else{
                 return
             }
-            self.categories.append(name)
+            //self.categories.append(name)
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
+            let managedContext = appDelegate.persistentContainer.viewContext
+            let entity = NSEntityDescription.entity(forEntityName:"Categories", in:managedContext)!
+            let record = NSManagedObject(entity:entity, insertInto:managedContext)
+            record.setValue(name, forKey:"categoryName")
+            
+            do {
+                try managedContext.save()
+                details.append(record)
+                print("Category Added!")
+                //To display an alert box
+                let alertController = UIAlertController(title: "Message", message: "New Category Added!", preferredStyle: .alert)
+                let OKAction = UIAlertAction(title: "OK", style: .default) {
+                    (action: UIAlertAction!) in
+                }
+                alertController.addAction(OKAction)
+                self.present(alertController, animated: true, completion: nil)
+            } catch
+            let error as NSError {
+                print("Could not save. \(error),\(error.userInfo)")
+            }
+            
             categoryTv.reloadData()
         }))
         present(alert, animated: true)
     }
+    
+    func showCategories(){
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+        return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest < NSManagedObject > (entityName: "Categories")
+        do {
+            details =
+            try managedContext.fetch(fetchRequest)
+        } catch
+        let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+}
     }
     
   
 
 extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc=storyboard?.instantiateViewController(withIdentifier: "SubCategoryListViewController") as? TasksListViewController{
-            vc.categoryName = categories[indexPath.row]
-            self.navigationController?.pushViewController(vc, animated: true)
-        
-        }
+        let cat = details[indexPath.row]
+//        if let vc=storyboard?.instantiateViewController(withIdentifier: "taskslist") as? TasksListViewController{
+//            vc.categoryName = String(describing: cat.value(forKey: "categoryName"))
+//            self.navigationController?.pushViewController(vc, animated: true)
+//
+//        }
+        self.performSegue(withIdentifier: "taskslist", sender: self)
     }
 }
 
@@ -72,12 +118,14 @@ extension ViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return details.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cat = details[indexPath.row]
         let cell = categoryTv.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
-        cell.textLabel?.text = categories[indexPath.row]
+        //cell.textLabel?.text = categories[indexPath.row]
+        cell.textLabel?.text = String(describing: cat.value(forKey: "categoryName") ?? "-")
         return cell
     }
     
