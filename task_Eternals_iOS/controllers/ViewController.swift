@@ -57,7 +57,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let vc=storyboard?.instantiateViewController(withIdentifier: "SubCategoryListViewController") as? SubCategoryListViewController{
+        if let vc=storyboard?.instantiateViewController(withIdentifier: "SubCategoryListViewController") as? TasksListViewController{
             vc.categoryName = categories[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
         

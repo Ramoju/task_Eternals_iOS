@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SubCategoryListViewController: UIViewController {
+class TasksListViewController: UIViewController {
 
     @IBOutlet weak var categoryName2: UILabel!
     
