@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3D0AD86B279897FC00BB8EAE /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0AD86A279897FC00BB8EAE /* TaskDetailsViewController.swift */; };
 		3D1593AD27975A52008E0EE6 /* SubCategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1593AC27975A52008E0EE6 /* SubCategoryListViewController.swift */; };
+		3DCFD2DB279938F70083A22E /* task_Eternals_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3DCFD2D9279938F70083A22E /* task_Eternals_iOS.xcdatamodeld */; };
 		77093BA2278F7F35008BE710 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77093BA1278F7F35008BE710 /* AppDelegate.swift */; };
 		77093BA4278F7F35008BE710 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77093BA3278F7F35008BE710 /* SceneDelegate.swift */; };
 		77093BA6278F7F35008BE710 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77093BA5278F7F35008BE710 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		3D0AD86A279897FC00BB8EAE /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		3D1593AC27975A52008E0EE6 /* SubCategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryListViewController.swift; sourceTree = "<group>"; };
+		3DCFD2DA279938F70083A22E /* task_Eternals_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = task_Eternals_iOS.xcdatamodel; sourceTree = "<group>"; };
 		77093B9E278F7F35008BE710 /* task_Eternals_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = task_Eternals_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77093BA1278F7F35008BE710 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77093BA3278F7F35008BE710 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				77093BAA278F7F36008BE710 /* Assets.xcassets */,
 				77093BAC278F7F36008BE710 /* LaunchScreen.storyboard */,
 				77093BAF278F7F36008BE710 /* Info.plist */,
+				3DCFD2D9279938F70083A22E /* task_Eternals_iOS.xcdatamodeld */,
 			);
 			path = task_Eternals_iOS;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				77093BA6278F7F35008BE710 /* ViewController.swift in Sources */,
 				3D1593AD27975A52008E0EE6 /* SubCategoryListViewController.swift in Sources */,
 				77093BA2278F7F35008BE710 /* AppDelegate.swift in Sources */,
+				3DCFD2DB279938F70083A22E /* task_Eternals_iOS.xcdatamodeld in Sources */,
 				77093BA4278F7F35008BE710 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,6 +634,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3DCFD2D9279938F70083A22E /* task_Eternals_iOS.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3DCFD2DA279938F70083A22E /* task_Eternals_iOS.xcdatamodel */,
+			);
+			currentVersion = 3DCFD2DA279938F70083A22E /* task_Eternals_iOS.xcdatamodel */;
+			path = task_Eternals_iOS.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 77093B96278F7F35008BE710 /* Project object */;
 }
