@@ -11,12 +11,12 @@ class TasksListViewController: UIViewController {
 
     @IBOutlet weak var categoryName2: UILabel!
     
-    var categoryName: String = ""
+    var categoryName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        categoryName2.text=categoryName
+        categoryName2.text = categoryName
     }
     
     

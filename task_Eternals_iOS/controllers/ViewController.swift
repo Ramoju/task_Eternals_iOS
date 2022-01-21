@@ -95,18 +95,38 @@ class ViewController: UIViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
 }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "taskslist" {
+//            if let indexPath = sender as? IndexPath {
+//                let destVC = segue.destination as! TasksListViewController
+//                let new = String(details[indexPath.row].value(forKey: "categoryName"))
+//                destVC.categoryName = new
+//            }
+//        }
+//    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "taskslist"{
+            let destination = segue.destination as! TasksListViewController
+            let selectedRow = categoryTv.indexPathForSelectedRow!.row
+            let cat = details[selectedRow]
+            destination.categoryName = String(describing: cat.value(forKey: "categoryName") ?? "-")
+        }
+    }
     }
     
   
 
 extension ViewController: UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cat = details[indexPath.row]
-//        if let vc=storyboard?.instantiateViewController(withIdentifier: "taskslist") as? TasksListViewController{
+        
+//        let cat = details[indexPath.row]
+//       if let vc=storyboard?.instantiateViewController(withIdentifier: "taskslist") as? TasksListViewController{
 //            vc.categoryName = String(describing: cat.value(forKey: "categoryName"))
 //            self.navigationController?.pushViewController(vc, animated: true)
-//
-//        }
+//       }
         self.performSegue(withIdentifier: "taskslist", sender: self)
     }
 }
