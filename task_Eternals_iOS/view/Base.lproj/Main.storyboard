@@ -106,6 +106,9 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" title="Task"/>
+                                <connections>
+                                    <action selector="newTask:" destination="wEa-37-XEB" eventType="touchUpInside" id="cSV-1L-gcL"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAk-bl-oqB">
                                 <rect key="frame" x="20" y="196" width="0.0" height="0.0"/>
@@ -130,6 +133,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wEa-37-XEB" id="d6z-00-YwM"/>
+                                    <outlet property="delegate" destination="wEa-37-XEB" id="MXT-Vp-ib4"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mby-kA-sUO">
                                 <rect key="frame" x="20" y="695" width="77" height="29"/>
@@ -165,6 +172,7 @@
                     <navigationItem key="navigationItem" id="YUR-vB-8gr"/>
                     <connections>
                         <outlet property="categoryName2" destination="fAk-bl-oqB" id="x7R-tw-v4o"/>
+                        <outlet property="tasksTV" destination="KP4-h6-Fqa" id="sUJ-bY-Khv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XGz-ht-SVz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

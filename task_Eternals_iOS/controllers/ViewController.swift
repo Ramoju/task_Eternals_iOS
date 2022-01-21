@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        tableView.register(UINib(nibName:"CategoryTableViewCell", bundle: nil), forCellReuseIdentifier:"categories")
         categoryTv.delegate=self
         categoryTv.dataSource=self
         showCategories()
@@ -37,7 +36,7 @@ class ViewController: UIViewController {
         
         //adding text field
         alert.addTextField { field in
-            field.placeholder = "category name"
+            field.placeholder = "Category name"
             field.returnKeyType = .continue
             field.keyboardType = .emailAddress
         }
