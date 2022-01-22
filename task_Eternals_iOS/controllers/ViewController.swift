@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         present(alert, animated: true)
     }
     
-    /// show alert when the name of the folder is taken
+    // show alert when the name of the folder is taken
     func showAlertWhenSameName() {
         let alert = UIAlertController(title: "Name Taken", message: "Please choose another name", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -95,6 +95,7 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    //fetching data from coredata
     func showCategories(){
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
         return
@@ -146,6 +147,8 @@ extension ViewController: UITableViewDelegate{
 //       }
         self.performSegue(withIdentifier: "taskslist", sender: self)
     }
+
+    
 }
 
 extension ViewController: UITableViewDataSource{
@@ -165,6 +168,7 @@ extension ViewController: UITableViewDataSource{
         cell.textLabel?.text = String(describing: cat.value(forKey: "categoryName") ?? "-")
         return cell
     }
+    
     
 }
 
