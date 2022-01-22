@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     var categories:[String] = []
     var details:[NSManagedObject] = []
     
+    //creating category array to get the core data variables
+    var category = [Categories]()
+    
     @IBOutlet weak var categoryTv: UITableView!
     
     override func viewDidLoad() {
@@ -43,15 +46,19 @@ class ViewController: UIViewController {
         
         //adding two buttons to alert
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { [self] _ in
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { [self] _ in
             // read the textfields from alert box
             guard let fields = alert.textFields, fields.count == 1 else{
                 return
             }
             let catName = fields[0]
-            guard let name = catName.text, !name.isEmpty else{
+            guard let name = catName.text, !name.isEmpty  else{
                 return
             }
+            /// for same name for category alert
+            let categoryNames = self.category.map {$0.categoryName?.lowercased()}
+            guard categoryNames.contains(name.lowercased()) else {self.showAlertWhenSameName(); return}
+            
             //self.categories.append(name)
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
             let managedContext = appDelegate.persistentContainer.viewContext
@@ -80,6 +87,14 @@ class ViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    /// show alert when the name of the folder is taken
+    func showAlertWhenSameName() {
+        let alert = UIAlertController(title: "Name Taken", message: "Please choose another name", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     func showCategories(){
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
         return
@@ -94,6 +109,9 @@ class ViewController: UIViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
 }
+    
+    
+    
     
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "taskslist" {

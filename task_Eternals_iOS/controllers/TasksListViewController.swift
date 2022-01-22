@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class TasksListViewController: UIViewController {
+class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
     @IBOutlet weak var categoryName2: UILabel!
     
@@ -25,6 +25,8 @@ class TasksListViewController: UIViewController {
         showTasks()
         tasksTV.reloadData()
     }
+    
+    
     
     @IBAction func newTask(_ sender: UIButton) {
         let alert = UIAlertController(title: "Alert!", message: "New Task", preferredStyle: .alert)
@@ -115,6 +117,10 @@ class TasksListViewController: UIViewController {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
 }
+    
+    
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "taskFullDetails"{
