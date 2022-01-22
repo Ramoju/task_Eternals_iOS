@@ -30,18 +30,26 @@ class TasksListViewController: UIViewController {
         let alert = UIAlertController(title: "Alert!", message: "New Task", preferredStyle: .alert)
         
         alert.addTextField { field in
-            field.placeholder = "Task name"
-            field.returnKeyType = .continue
+            field.placeholder = "Enter Task name"
+            field.returnKeyType = .next
             field.keyboardType = .emailAddress
         }
         alert.addTextField { field in
-            field.placeholder = "Task Description"
+            field.placeholder = "Enter Task Description"
+            field.returnKeyType = .next
+            field.keyboardType = .emailAddress
+        }
+        //// - TODO SNEHITHA
+        alert.addTextField{ field in
+            field.placeholder = "Enter Status"
+            field.returnKeyType = .next
+            field.keyboardType = .emailAddress
         }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [self] _ in
             // read the textfields from alert box
-            guard let fields = alert.textFields, fields.count == 2 else{
+            guard let fields = alert.textFields, fields.count == 3 else{
                 return
             }
             let taskName = fields[0]
@@ -53,14 +61,21 @@ class TasksListViewController: UIViewController {
             guard let taskDescription = taskdesc.text, !taskDescription.isEmpty else{
                 return
             }
+            let status = fields[2]
+            print(status)
+            guard let taskStatus = status.text, !taskStatus.isEmpty else{
+                return
+            }
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
             let managedContext = appDelegate.persistentContainer.viewContext
             let entity = NSEntityDescription.entity(forEntityName:"Task", in:managedContext)!
             let record = NSManagedObject(entity:entity, insertInto:managedContext)
             record.setValue(name, forKey:"taskName")
             record.setValue(categoryName, forKey: "categoryName")
-            print(categoryName)
+            print(categoryName!)
             record.setValue(taskDescription, forKey:"taskDescription")
+            record.setValue(taskStatus, forKey: "status")
+            print(taskStatus)
             
             do {
                 try managedContext.save()
@@ -101,7 +116,24 @@ class TasksListViewController: UIViewController {
         }
 }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "taskFullDetails"{
+            let destination = segue.destination as! TaskDetailsViewController
+            let selectedRow = tasksTV.indexPathForSelectedRow!.row
+            let cat = details[selectedRow]
+            destination.categoryName3 = String(describing: cat.value(forKey: "categoryName") ?? "-")
+            destination.taskName3 = String(describing: cat.value(forKey: "taskName") ?? "-")
+            destination.status3 = String(describing: cat.value(forKey: "status") ?? "-")
+            destination.description3 = String(describing: cat.value(forKey: "taskDescription") ?? "-")
+            //destination.dueDate3 = Date(
+           //destination.currentDate3 = Date(describing: cat.value(forKey: "startDate") ?? "-")
+          //destination.image3 = UIImage(
+            
+            
+            
+            
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -115,6 +147,9 @@ class TasksListViewController: UIViewController {
 
 }
 
+
+
+
 extension TasksListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -124,7 +159,7 @@ extension TasksListViewController: UITableViewDelegate{
 //            vc.categoryName = String(describing: cat.value(forKey: "categoryName"))
 //            self.navigationController?.pushViewController(vc, animated: true)
 //       }
-        self.performSegue(withIdentifier: "taskslist", sender: self)
+        self.performSegue(withIdentifier: "taskFullDetails", sender: self)
     }
 }
 
