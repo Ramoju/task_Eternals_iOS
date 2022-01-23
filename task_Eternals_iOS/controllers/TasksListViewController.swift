@@ -168,7 +168,7 @@ extension TasksListViewController: UITableViewDelegate{
 //            vc.categoryName = String(describing: cat.value(forKey: "categoryName"))
 //            self.navigationController?.pushViewController(vc, animated: true)
 //       }
-        self.performSegue(withIdentifier: "taskFullDetails", sender: self)
+       // self.performSegue(withIdentifier: "taskFullDetails", sender: self)
     }
     
     
