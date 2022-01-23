@@ -10,6 +10,11 @@ import CoreData
 
 class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
+    //initiating date picker view
+    var datePicker: UIDatePicker = UIDatePicker()
+    let toolBar = UIToolbar()
+    let dateFormatter1 = DateFormatter()
+    let date = Date()
     
     @IBOutlet weak var categoryName2: UILabel!
     
@@ -30,28 +35,36 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
     }
     
     
-    
     @IBAction func newTask(_ sender: UIButton) {
         let alert = UIAlertController(title: "Alert!", message: "New Task", preferredStyle: .alert)
         
+        //task name text field
         alert.addTextField { field in
             field.placeholder = "Enter Task name"
             field.returnKeyType = .next
             field.keyboardType = .emailAddress
         }
+        //task description textfield
         alert.addTextField { field in
             field.placeholder = "Enter Task Description"
             field.returnKeyType = .next
             field.keyboardType = .emailAddress
         }
+        //due date text field
+        alert.addTextField { [self] (field) in
+                field.text = eDate
+                self.createDatePicker()
+//              eDate=dateFormatter1.string(from: date)
+                field.inputView = self.datePicker
+                field.inputAccessoryView = self.toolBar
+            }
+        
         //// - TODO SNEHITHA
        
-        
-        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [self] _ in
             // read the textfields from alert box
-            guard let fields = alert.textFields, fields.count == 2 else{
+            guard let fields = alert.textFields, fields.count == 3 else{
                 return
             }
             let taskName = fields[0]
@@ -63,6 +76,11 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
             guard let taskDescription = taskdesc.text, !taskDescription.isEmpty else{
                 return
             }
+            let dueDate = fields[2]
+            guard let endDate = dueDate.text else{
+                return
+            }
+            
             
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
             let managedContext = appDelegate.persistentContainer.viewContext
@@ -73,7 +91,8 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
             print(categoryName!)
             record.setValue(taskDescription, forKey:"taskDescription")
             record.setValue("Open", forKey: "status")
-           // print(taskStatus)
+            record.setValue(datePicker.date, forKey: "dueDate")
+            record.setValue(Date.now, forKey: "startDate")
             
             do {
                 try managedContext.save()
@@ -96,6 +115,50 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
         present(alert, animated: true)
     }
     
+    
+    //datepickerview
+    func createDatePicker(){
+        //designing the datepicker
+        self.datePicker = UIDatePicker(frame: CGRect(x: 0, y: 40, width: 270, height: 200))
+        self.datePicker.backgroundColor = UIColor.lightGray
+        datePicker.datePickerMode = .dateAndTime
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(TasksListViewController.doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(TasksListViewController.cancelClick))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
+        toolBar.isUserInteractionEnabled = true
+
+        self.toolBar.isHidden = false
+        
+    }
+
+
+    var eDate: String = "00/00/00"
+    @objc func doneClick() {
+       // dateFormatter1.dateStyle = .short
+        dateFormatter1.timeStyle = .none
+        dateFormatter1.dateFormat = "YY/MM/DD"
+        eDate = dateFormatter1.string(from: datePicker.date)
+        print(eDate)
+        
+
+        datePicker.isHidden = true
+        self.toolBar.isHidden = true
+    }
+
+    @objc func cancelClick() {
+        datePicker.isHidden = true
+        self.toolBar.isHidden = true
+    }
+    
+    
+    // used to fetch data from cd
     func showTasks(){
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
         return
@@ -127,8 +190,8 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
             destination.taskName3 = String(describing: cat.value(forKey: "taskName") ?? "-")
             destination.status3 = String(describing: cat.value(forKey: "status") ?? "-")
             destination.description3 = String(describing: cat.value(forKey: "taskDescription") ?? "-")
-            //destination.dueDate3 = Date(
-           //destination.currentDate3 = Date(describing: cat.value(forKey: "startDate") ?? "-")
+            destination.dueDate3 = String(describing: cat.value(forKey: "dueDate") ?? "-")
+           destination.currentDate3 = String(describing: cat.value(forKey: "startDate") ?? "-")
           //destination.image3 = UIImage(
             
             

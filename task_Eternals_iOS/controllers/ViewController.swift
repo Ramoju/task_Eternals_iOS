@@ -61,6 +61,13 @@ class ViewController: UIViewController {
             //let categoryNames = self.category.map {$0.categoryName?.lowercased()}
             //guard categoryNames.contains(name.lowercased()) else {self.showAlertWhenSameName(); return}
             
+            // for same name for category alert
+            for i in 0..<details.count{
+                if name == String(describing: details[i].value(forKey: "categoryName") ?? "_"){
+                    self.showAlertWhenSameName()
+                }
+            }
+            
             //self.categories.append(name)
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
             let managedContext = appDelegate.persistentContainer.viewContext
