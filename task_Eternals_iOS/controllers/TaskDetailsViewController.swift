@@ -43,29 +43,13 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func btnCamera(_ sender: UIButton) {
-    let image = UIImagePickerController()
-            image.delegate=self
-            image.sourceType = .photoLibrary
-            image.allowsEditing = false
-            self.present(image, animated: true)
-            {
-                
-            }
-            
-        }
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-            {
-                print("success")
-                print(image)
-                imageView.contentMode = .scaleToFill
-                imageView.image=image
-                
-            }
-            else{
-                
-            }
-            self.dismiss(animated: true, completion:nil)
+        let alert = UIAlertController(title: "select input", message: "", preferredStyle:  .actionSheet)
+        alert.addAction(UIAlertAction(title: "camera roll", style: .default, handler: { UIAlertAction in
+self.handleCameraRoll()}))
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.handleCamera()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     @IBAction func editTaskBtn(_ sender: UIButton) {
         
@@ -126,6 +110,52 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
         
         
     }
+    func handleCameraRoll(){
+        let image = UIImagePickerController()
+                 image.delegate=self
+             image.sourceType = UIImagePickerController.SourceType.photoLibrary
+             //image.sourceType = UIImagePickerController.SourceType.camera
+                 image.allowsEditing = false
+                 self.present(image, animated: true)
+                 {
+                     
+                 }
+                 
+             }
+             func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                 if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+                 {
+                     imageView.contentMode = .scaleToFill
+                     imageView.image=image
+                     
+                 }
+                 
+                 self.dismiss(animated: true, completion:nil)
+    }
+    func handleCamera(){
+        let image = UIImagePickerController()
+                 image.delegate=self
+             //image.sourceType = UIImagePickerController.SourceType.photoLibrary
+             image.sourceType = UIImagePickerController.SourceType.camera
+                 image.allowsEditing = false
+                 self.present(image, animated: true)
+                 {
+                     
+                 }
+                 
+             }
+             func imagePickerController1(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                 if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+                 {
+                     imageView.contentMode = .scaleToFill
+                     imageView.image=image
+                     
+                 }
+                 
+                 self.dismiss(animated: true, completion:nil)
+        
+    }
+
     
     /*
     // MARK: - Navigation
