@@ -42,6 +42,18 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func btnAudio(_ sender: UIButton) {
+        let alert = UIAlertController(title: "select input", message: "", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "audio recoding", style: .default, handler: { _ in
+            self.handleAudioRecording()
+            
+            
+        }))
+        alert.addAction(UIAlertAction(title: "audio files", style: .default, handler: { _ in
+            self.handleAudioFiles()
+        }))
+        self.present(alert, animated:  true, completion: nil)
+    }
     @IBAction func btnCamera(_ sender: UIButton) {
         let alert = UIAlertController(title: "select input", message: "", preferredStyle:  .actionSheet)
         alert.addAction(UIAlertAction(title: "camera roll", style: .default, handler: { UIAlertAction in
@@ -155,7 +167,13 @@ self.handleCameraRoll()}))
                  self.dismiss(animated: true, completion:nil)
         
     }
+    func handleAudioRecording(){
+        //todo
 
+    }
+    func handleAudioFiles(){
+        //todo
+    }
     
     /*
     // MARK: - Navigation

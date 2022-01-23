@@ -296,6 +296,9 @@
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="mic.fill" catalog="system" title="Audio"/>
+                                        <connections>
+                                            <action selector="btnAudio:" destination="tMH-Fp-TQ7" eventType="touchUpInside" id="23c-yE-rfz"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hpy-qF-xDg">
                                         <rect key="frame" x="276" y="0.0" width="138" height="40"/>
