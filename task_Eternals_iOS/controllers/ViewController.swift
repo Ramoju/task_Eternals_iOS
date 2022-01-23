@@ -23,6 +23,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "To Do List"
+        
         categoryTv.delegate=self
         categoryTv.dataSource=self
         showCategories()
