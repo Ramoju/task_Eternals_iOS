@@ -35,10 +35,11 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
         taskNameLb.text = taskName3
         statusLb.text = status3
         descriptionLb.text = description3
+        
         //music
         //imageView.image
-        //startDateLb.text =
-        //dueDateLb.text =
+        startDateLb.text = currentDate3
+        dueDateLb.text = dueDate3
         // Do any additional setup after loading the view.
     }
     

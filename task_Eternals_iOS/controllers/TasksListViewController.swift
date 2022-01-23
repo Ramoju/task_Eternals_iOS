@@ -145,7 +145,7 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
         dateFormatter1.timeStyle = .none
         dateFormatter1.dateFormat = "YY/MM/DD"
         eDate = dateFormatter1.string(from: datePicker.date)
-        print(eDate)
+        print("here the date is:*****************"+eDate)
         
 
         datePicker.isHidden = true
