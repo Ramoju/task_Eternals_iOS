@@ -10,8 +10,7 @@ import CoreData
 
 class ViewController: UIViewController {
 
-    
-    //var categories = ["Books", "Groceries", "Shopping-List", "Movies"]
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var categories:[String] = []
     var details:[NSManagedObject] = []
     
@@ -161,6 +160,22 @@ extension ViewController: UITableViewDelegate{
 }
 
 extension ViewController: UITableViewDataSource{
+    
+    //to delete row when you swipe
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "delete") { [self] _, _, _ in
+            do{
+            self.context.delete(self.details[indexPath.row])
+                try self.context.save()
+                self.showCategories()
+            }catch{
+                print(error)
+            }
+            categoryTv.deleteRows(at: [indexPath], with: .automatic)
+        }
+        let swipe = UISwipeActionsConfiguration(actions: [delete])
+        return swipe
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
