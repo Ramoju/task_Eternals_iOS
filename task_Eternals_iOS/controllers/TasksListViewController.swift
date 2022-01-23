@@ -45,16 +45,13 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
             field.keyboardType = .emailAddress
         }
         //// - TODO SNEHITHA
-        alert.addTextField{ field in
-            field.placeholder = "Enter Status"
-            field.returnKeyType = .next
-            field.keyboardType = .emailAddress
-        }
+       
+        
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [self] _ in
             // read the textfields from alert box
-            guard let fields = alert.textFields, fields.count == 3 else{
+            guard let fields = alert.textFields, fields.count == 2 else{
                 return
             }
             let taskName = fields[0]
@@ -66,11 +63,7 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
             guard let taskDescription = taskdesc.text, !taskDescription.isEmpty else{
                 return
             }
-            let status = fields[2]
-            print(status)
-            guard let taskStatus = status.text, !taskStatus.isEmpty else{
-                return
-            }
+            
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
             let managedContext = appDelegate.persistentContainer.viewContext
             let entity = NSEntityDescription.entity(forEntityName:"Task", in:managedContext)!
@@ -79,8 +72,8 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
             record.setValue(categoryName, forKey: "categoryName")
             print(categoryName!)
             record.setValue(taskDescription, forKey:"taskDescription")
-            record.setValue(taskStatus, forKey: "status")
-            print(taskStatus)
+            record.setValue("Open", forKey: "status")
+           // print(taskStatus)
             
             do {
                 try managedContext.save()

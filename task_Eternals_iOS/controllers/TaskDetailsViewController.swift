@@ -44,7 +44,59 @@ class TaskDetailsViewController: UIViewController {
     
     @IBAction func editTaskBtn(_ sender: UIButton) {
         
-        
+        let alert = UIAlertController(title: "Alert!", message: "Please enter the Category Name", preferredStyle: .alert)
+                
+                //adding text field
+                alert.addTextField { field in
+                    //field.placeholder = "Category name"
+                    field.returnKeyType = .continue
+                    field.keyboardType = .emailAddress
+                    field.placeholder = self.categoryName3
+                }
+                alert.addTextField { field in
+                    //field.placeholder = "Category name"
+                    field.returnKeyType = .continue
+                    field.keyboardType = .emailAddress
+                    
+                    field.placeholder = self.taskName3
+                }
+                alert.addTextField { field in
+                    //field.placeholder = "Category name"
+                    field.returnKeyType = .continue
+                    field.keyboardType = .emailAddress
+                    
+                    field.placeholder = self.description3
+                }
+               
+
+                
+                //adding two buttons to alert
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [self] _ in
+                    // read the textfields from alert box
+                    guard let fields = alert.textFields, fields.count == 3 else{
+                        return
+                    }
+                    let catName = fields[0]
+                    guard let name = catName.text, !name.isEmpty  else{
+                        return
+                    }
+                    let taskName = fields[1]
+                    guard let name = taskName.text, !name.isEmpty  else{
+                        return
+                    }
+                    let description = fields[2]
+                    guard let name = description.text, !name.isEmpty  else{
+                        return
+                    }
+                   
+                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+                        return
+                        }
+
+                    
+                }))
+                self.present(alert, animated: true, completion: nil)
         
         
         
