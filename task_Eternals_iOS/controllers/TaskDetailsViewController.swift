@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TaskDetailsViewController: UIViewController {
+class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     var categoryName3: String!
     var taskName3: String!
@@ -42,6 +42,31 @@ class TaskDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func btnCamera(_ sender: UIButton) {
+    let image = UIImagePickerController()
+            image.delegate=self
+            image.sourceType = .photoLibrary
+            image.allowsEditing = false
+            self.present(image, animated: true)
+            {
+                
+            }
+            
+        }
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+            {
+                print("success")
+                print(image)
+                imageView.contentMode = .scaleToFill
+                imageView.image=image
+                
+            }
+            else{
+                
+            }
+            self.dismiss(animated: true, completion:nil)
+    }
     @IBAction func editTaskBtn(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "Alert!", message: "Please enter the Category Name", preferredStyle: .alert)
