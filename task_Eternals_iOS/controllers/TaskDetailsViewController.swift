@@ -32,6 +32,7 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var descriptionLb: UILabel!
     @IBOutlet weak var statusLb: UILabel!
     @IBOutlet weak var taskNameLb: UILabel!
+    @IBOutlet weak var statusBtnLB: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         categoryNameLb.text = categoryName3
@@ -45,7 +46,7 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func btnAudio(_ sender: UIButton) {
         let alert = UIAlertController(title: "select input", message: "", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "audio recoding", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "audio recording", style: .default, handler: { _ in
             self.handleAudioRecording()
             
             
@@ -56,38 +57,43 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
         self.present(alert, animated:  true, completion: nil)
     }
     @IBAction func btnCamera(_ sender: UIButton) {
-        let alert = UIAlertController(title: "select input", message: "", preferredStyle:  .actionSheet)
-        alert.addAction(UIAlertAction(title: "camera roll", style: .default, handler: { UIAlertAction in
+        let alert = UIAlertController(title: "Select Input", message: "", preferredStyle:  .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera roll", style: .default, handler: { UIAlertAction in
 self.handleCameraRoll()}))
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.handleCamera()
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @IBAction func statusClicked(_ sender: UIButton) {
+        statusLb.text = "Completed"
+        sender.setTitle("Completed", for: .normal)
+    }
+    
+    
     @IBAction func editTaskBtn(_ sender: UIButton) {
         
-        let alert = UIAlertController(title: "Alert!", message: "Please enter the Category Name", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Task", message: "Edit Task details", preferredStyle: .alert)
                 
                 //adding text field
                 alert.addTextField { field in
                     //field.placeholder = "Category name"
                     field.returnKeyType = .continue
                     field.keyboardType = .emailAddress
-                    field.placeholder = self.categoryName3
+                    field.text = self.categoryName3
                 }
                 alert.addTextField { field in
                     //field.placeholder = "Category name"
                     field.returnKeyType = .continue
                     field.keyboardType = .emailAddress
-                    
-                    field.placeholder = self.taskName3
+                    field.text = self.taskName3
                 }
                 alert.addTextField { field in
                     //field.placeholder = "Category name"
                     field.returnKeyType = .continue
                     field.keyboardType = .emailAddress
-                    
-                    field.placeholder = self.description3
+                    field.text = self.description3
                 }
                
 
@@ -111,47 +117,9 @@ self.handleCameraRoll()}))
                     guard let desc = description.text, !desc.isEmpty  else{
                         return
                     }
-                   
-                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
-                        return
-                        }
-
-                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
-                    let managedContext = appDelegate.persistentContainer.viewContext
-                    let entity = NSEntityDescription.entity(forEntityName:"Task", in:managedContext)!
-                    let record = NSManagedObject(entity:entity, insertInto:managedContext)
-                    record.setValue(tName, forKey:"taskName")
-                    record.setValue(cName, forKey: "categoryName")
-                    print(cName)
-                    print(desc)
-                    record.setValue(desc, forKey:"taskDescription")
-                    print("@@@@@@@@@@@@@@@@@@@ \(index)")
-                    let cat = details[index]
-                    categoryNameLb.text = String(describing: cat.value(forKey: "categoryName") ?? "-")
-                    taskNameLb.text = String(describing: cat.value(forKey: "taskName") ?? "-")
-                    descriptionLb.text = String(describing: cat.value(forKey: "taskDescription") ?? "-")
-                    do {
-                        try managedContext.save()
-                        details.append(record)
-                        print("Task edited!")
-                        //To display an alert box
-                        let alertController = UIAlertController(title: "Message", message: "Task Edited!", preferredStyle: .alert)
-                        let OKAction = UIAlertAction(title: "OK", style: .default) {
-                            (action: UIAlertAction!) in
-                        }
-                        alertController.addAction(OKAction)
-                        self.present(alertController, animated: true, completion: nil)
-                    } catch
-                    let error as NSError {
-                        print("Could not save. \(error),\(error.userInfo)")
-                    }
-                    
-                    
                     
                 }))
                 self.present(alert, animated: true, completion: nil)
-        
-        
         
     }
     func handleCameraRoll(){

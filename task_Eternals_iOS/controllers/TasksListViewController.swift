@@ -15,6 +15,7 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
     let toolBar = UIToolbar()
     let dateFormatter1 = DateFormatter()
     let date = Date()
+    var searchController: UISearchController!
     
     @IBOutlet weak var categoryName2: UILabel!
     
@@ -166,8 +167,8 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
         return
         }
         let managedContext = appDelegate.persistentContainer.viewContext
-        //let predicate = NSPredicate(format: "categoryName == %@", categoryName)
-        //print(categoryName)
+        let predicate = NSPredicate(format: "categoryName == %@", categoryName)
+        print(categoryName!)
         let fetchRequest = NSFetchRequest < NSManagedObject > (entityName: "Task")
         fetchRequest.predicate = predicate
         do {

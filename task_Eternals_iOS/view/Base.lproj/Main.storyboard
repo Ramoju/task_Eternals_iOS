@@ -303,7 +303,10 @@
                                         <color key="backgroundColor" systemColor="systemTealColor"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Status"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Tap to Complete"/>
+                                        <connections>
+                                            <action selector="statusClicked:" destination="tMH-Fp-TQ7" eventType="touchUpInside" id="Tti-M0-8gY"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -329,7 +332,6 @@
                         <constraints>
                             <constraint firstItem="Jhb-LI-Dp4" firstAttribute="top" secondItem="dYZ-Wq-Cel" secondAttribute="bottom" constant="20" id="06R-Hn-fFx"/>
                             <constraint firstItem="AlX-Uf-feC" firstAttribute="top" secondItem="oUF-Xl-MlT" secondAttribute="bottom" constant="20" id="0Uh-Xy-Aq5"/>
-                            <constraint firstItem="lX3-F1-tjl" firstAttribute="leading" secondItem="M0c-au-EhK" secondAttribute="leading" constant="326.5" id="0mI-6M-nvE"/>
                             <constraint firstItem="ndy-Ye-Lt8" firstAttribute="top" secondItem="PnJ-9o-0cM" secondAttribute="bottom" constant="20" id="11B-Zp-fcV"/>
                             <constraint firstItem="oUF-Xl-MlT" firstAttribute="top" secondItem="7jT-EW-lTb" secondAttribute="bottom" constant="20" id="2uP-cf-pjC"/>
                             <constraint firstItem="4NK-AK-YeP" firstAttribute="leading" secondItem="PKS-jk-2ET" secondAttribute="trailing" constant="60" id="3pl-gC-CKo"/>
@@ -380,6 +382,7 @@
                         <outlet property="dueDateLb" destination="vta-dO-iu9" id="fK3-Qc-ooG"/>
                         <outlet property="imageView" destination="wTc-h5-MFa" id="tc1-zz-OuO"/>
                         <outlet property="startDateLb" destination="laa-C1-tfg" id="W7o-f0-zie"/>
+                        <outlet property="statusBtnLB" destination="Hpy-qF-xDg" id="MHf-dl-Dnw"/>
                         <outlet property="statusLb" destination="gbb-QM-sGb" id="x9D-3a-Rj3"/>
                         <outlet property="taskNameLb" destination="PnJ-9o-0cM" id="8LS-4U-e1H"/>
                     </connections>
