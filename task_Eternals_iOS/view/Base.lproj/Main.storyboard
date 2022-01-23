@@ -149,6 +149,7 @@
                     <navigationItem key="navigationItem" id="YUR-vB-8gr"/>
                     <connections>
                         <outlet property="categoryName2" destination="fAk-bl-oqB" id="x7R-tw-v4o"/>
+                        <outlet property="searchBar" destination="sT1-Cg-J9H" id="ACn-OG-CeB"/>
                         <outlet property="tasksTV" destination="KP4-h6-Fqa" id="sUJ-bY-Khv"/>
                     </connections>
                 </viewController>

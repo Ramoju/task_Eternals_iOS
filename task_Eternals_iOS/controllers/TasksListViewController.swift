@@ -19,6 +19,7 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
     @IBOutlet weak var categoryName2: UILabel!
     
     @IBOutlet weak var tasksTV: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     var categoryName: String!
     var details:[NSManagedObject] = []
     
@@ -26,13 +27,14 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        searchBar.delegate = self
         categoryName2.text = categoryName
         tasksTV.delegate = self
         tasksTV.dataSource = self
         showTasks()
         tasksTV.reloadData()
     }
+    
     
     
     @IBAction func newTask(_ sender: UIButton) {
@@ -159,7 +161,7 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
     
     
     // used to fetch data from cd
-    func showTasks(){
+    func showTasks(predicate: NSPredicate? = nil){
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
         return
         }
@@ -167,7 +169,7 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
         //let predicate = NSPredicate(format: "categoryName == %@", categoryName)
         //print(categoryName)
         let fetchRequest = NSFetchRequest < NSManagedObject > (entityName: "Task")
-        //fetchRequest.predicate = predicate
+        fetchRequest.predicate = predicate
         do {
             details =
             try managedContext.fetch(fetchRequest)
@@ -290,6 +292,28 @@ extension TasksListViewController: UITableViewDataSource{
         cell.textLabel?.text = String(describing: task.value(forKey: "taskName") ?? "-")
         return cell
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            // add predicate
+            let predicate = NSPredicate(format: "taskName CONTAINS[cd] %@", searchBar.text!)
+            showTasks(predicate: predicate)
+        }
+        
+        
+        /// when the text in text bar is changed
+        /// - Parameters:
+        ///   - searchBar: search bar is passed to this function
+        ///   - searchText: the text that is written in the search bar
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            if searchBar.text?.count == 0 {
+                showTasks()
+                
+                DispatchQueue.main.async {
+                    searchBar.resignFirstResponder()
+                }
+            }
+        }
+    
     
     
 }
