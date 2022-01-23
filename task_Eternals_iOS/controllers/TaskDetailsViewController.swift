@@ -5,10 +5,12 @@
 //  Created by Sai Snehitha Bhatta on 19/01/22.
 //
 
+import CoreData
 import UIKit
 
 class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
+    var index: Int = 0
     var categoryName3: String!
     var taskName3: String!
     var status3: String!
@@ -16,6 +18,7 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
     var currentDate3: String!
     var dueDate3: String!
     var image3: UIImage!
+    var details:[NSManagedObject] = []
     /// audio??
     
     
@@ -35,9 +38,6 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
         taskNameLb.text = taskName3
         statusLb.text = status3
         descriptionLb.text = description3
-        
-        //music
-        //imageView.image
         startDateLb.text = currentDate3
         dueDateLb.text = dueDate3
         // Do any additional setup after loading the view.
@@ -100,15 +100,15 @@ self.handleCameraRoll()}))
                         return
                     }
                     let catName = fields[0]
-                    guard let name = catName.text, !name.isEmpty  else{
+                    guard let cName = catName.text, !cName.isEmpty  else{
                         return
                     }
                     let taskName = fields[1]
-                    guard let name = taskName.text, !name.isEmpty  else{
+                    guard let tName = taskName.text, !tName.isEmpty  else{
                         return
                     }
                     let description = fields[2]
-                    guard let name = description.text, !name.isEmpty  else{
+                    guard let desc = description.text, !desc.isEmpty  else{
                         return
                     }
                    
@@ -116,6 +116,37 @@ self.handleCameraRoll()}))
                         return
                         }
 
+                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
+                    let managedContext = appDelegate.persistentContainer.viewContext
+                    let entity = NSEntityDescription.entity(forEntityName:"Task", in:managedContext)!
+                    let record = NSManagedObject(entity:entity, insertInto:managedContext)
+                    record.setValue(tName, forKey:"taskName")
+                    record.setValue(cName, forKey: "categoryName")
+                    print(cName)
+                    print(desc)
+                    record.setValue(desc, forKey:"taskDescription")
+                    print("@@@@@@@@@@@@@@@@@@@ \(index)")
+                    let cat = details[index]
+                    categoryNameLb.text = String(describing: cat.value(forKey: "categoryName") ?? "-")
+                    taskNameLb.text = String(describing: cat.value(forKey: "taskName") ?? "-")
+                    descriptionLb.text = String(describing: cat.value(forKey: "taskDescription") ?? "-")
+                    do {
+                        try managedContext.save()
+                        details.append(record)
+                        print("Task edited!")
+                        //To display an alert box
+                        let alertController = UIAlertController(title: "Message", message: "Task Edited!", preferredStyle: .alert)
+                        let OKAction = UIAlertAction(title: "OK", style: .default) {
+                            (action: UIAlertAction!) in
+                        }
+                        alertController.addAction(OKAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    } catch
+                    let error as NSError {
+                        print("Could not save. \(error),\(error.userInfo)")
+                    }
+                    
+                    
                     
                 }))
                 self.present(alert, animated: true, completion: nil)

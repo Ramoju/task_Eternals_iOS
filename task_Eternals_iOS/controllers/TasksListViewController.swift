@@ -180,18 +180,21 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
     
     
     
+    var selectedRow: Int = 0
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "taskFullDetails"{
             let destination = segue.destination as! TaskDetailsViewController
-            let selectedRow = tasksTV.indexPathForSelectedRow!.row
+            selectedRow = tasksTV.indexPathForSelectedRow!.row
             let cat = details[selectedRow]
+            destination.index = selectedRow
             destination.categoryName3 = String(describing: cat.value(forKey: "categoryName") ?? "-")
             destination.taskName3 = String(describing: cat.value(forKey: "taskName") ?? "-")
             destination.status3 = String(describing: cat.value(forKey: "status") ?? "-")
             destination.description3 = String(describing: cat.value(forKey: "taskDescription") ?? "-")
             destination.dueDate3 = String(describing: cat.value(forKey: "dueDate") ?? "-")
            destination.currentDate3 = String(describing: cat.value(forKey: "startDate") ?? "-")
+            
           //destination.image3 = UIImage(
             
             
