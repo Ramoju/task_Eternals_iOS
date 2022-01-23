@@ -3,6 +3,12 @@
     <entity name="Categories" representedClassName="Categories" syncable="YES" codeGenerationType="class">
         <attribute name="categoryName" optional="YES" attributeType="String"/>
         <attribute name="statusIndicator" optional="YES" attributeType="String"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="parentCategory" inverseEntity="Task"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="categoryName"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Task" representedClassName="Tasks" syncable="YES" codeGenerationType="class">
         <attribute name="audio" optional="YES" attributeType="Binary"/>
@@ -13,9 +19,10 @@
         <attribute name="status" optional="YES" attributeType="String"/>
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
         <attribute name="taskName" optional="YES" attributeType="String"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Categories" inverseName="tasks" inverseEntity="Categories"/>
     </entity>
     <elements>
-        <element name="Categories" positionX="-63" positionY="45" width="128" height="59"/>
-        <element name="Task" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="Categories" positionX="-63" positionY="45" width="128" height="74"/>
+        <element name="Task" positionX="-63" positionY="-18" width="128" height="164"/>
     </elements>
 </model>
