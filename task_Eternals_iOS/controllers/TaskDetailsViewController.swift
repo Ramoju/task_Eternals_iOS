@@ -13,8 +13,8 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
     var taskName3: String!
     var status3: String!
     var description3: String!
-    var currentDate3: Date!
-    var dueDate3: Date!
+    var currentDate3: String!
+    var dueDate3: String!
     var image3: UIImage!
     /// audio??
     
