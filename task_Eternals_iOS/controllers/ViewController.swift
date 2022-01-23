@@ -56,8 +56,8 @@ class ViewController: UIViewController {
                 return
             }
             /// for same name for category alert
-            let categoryNames = self.category.map {$0.categoryName?.lowercased()}
-            guard categoryNames.contains(name.lowercased()) else {self.showAlertWhenSameName(); return}
+            //let categoryNames = self.category.map {$0.categoryName?.lowercased()}
+            //guard categoryNames.contains(name.lowercased()) else {self.showAlertWhenSameName(); return}
             
             //self.categories.append(name)
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
@@ -145,7 +145,7 @@ extension ViewController: UITableViewDelegate{
 //            vc.categoryName = String(describing: cat.value(forKey: "categoryName"))
 //            self.navigationController?.pushViewController(vc, animated: true)
 //       }
-        self.performSegue(withIdentifier: "taskslist", sender: self)
+      //  self.performSegue(withIdentifier: "taskslist", sender: self)
     }
 
     
