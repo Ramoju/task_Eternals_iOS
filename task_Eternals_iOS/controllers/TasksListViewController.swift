@@ -163,8 +163,8 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
     
     // used to fetch data from cd
     func showTasks(predicate: NSPredicate? = nil){
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
-        return
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+            return
         }
         let managedContext = appDelegate.persistentContainer.viewContext
         let predicate = NSPredicate(format: "categoryName == %@", categoryName)
@@ -178,7 +178,8 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
         let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-}
+        tasksTV.reloadData()
+    }
     
     
     
@@ -294,26 +295,32 @@ extension TasksListViewController: UITableViewDataSource{
         return cell
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            // add predicate
-            let predicate = NSPredicate(format: "taskName CONTAINS[cd] %@", searchBar.text!)
-            showTasks(predicate: predicate)
-        }
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//            // add predicate
+//            let predicate = NSPredicate(format: "taskName CONTAINS[cd] %@", searchBar.text!)
+//            showTasks(predicate: predicate)
+//    }
         
         
         /// when the text in text bar is changed
         /// - Parameters:
         ///   - searchBar: search bar is passed to this function
         ///   - searchText: the text that is written in the search bar
-        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            if searchBar.text?.count == 0 {
-                showTasks()
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            showTasks()
                 
-                DispatchQueue.main.async {
-                    searchBar.resignFirstResponder()
-                }
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
             }
+        }else{
+//            let predicate = NSPredicate(format: "taskName CONTAINS[cd] %@", searchBar.text!)
+//            showTasks(predicate: predicate)
+            //showTasksBySearch(searchText: searchText)
         }
+    }
+    
+    
     
     
     
