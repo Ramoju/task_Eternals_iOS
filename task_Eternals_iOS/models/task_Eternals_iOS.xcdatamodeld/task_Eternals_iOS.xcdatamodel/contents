@@ -4,11 +4,6 @@
         <attribute name="categoryName" optional="YES" attributeType="String"/>
         <attribute name="statusIndicator" optional="YES" attributeType="String"/>
         <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Task" inverseName="parentCategory" inverseEntity="Task"/>
-        <uniquenessConstraints>
-            <uniquenessConstraint>
-                <constraint value="categoryName"/>
-            </uniquenessConstraint>
-        </uniquenessConstraints>
     </entity>
     <entity name="Task" representedClassName="Tasks" syncable="YES" codeGenerationType="class">
         <attribute name="audio" optional="YES" attributeType="Binary"/>
