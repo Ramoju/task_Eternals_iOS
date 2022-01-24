@@ -325,11 +325,10 @@ extension TasksListViewController: UITableViewDataSource{
             return
         }
         let managedContext = appDelegate.persistentContainer.viewContext
-//        let predicate1 = NSPredicate(format: "categoryName == %@", categoryName)
-//        let predicate2 = NSPredicate(format: "taskName CONTAINS[cd] %@", searchText)
-//        let predicate = NSCompoundPredicate( andPredicateWithSubpredicates: [predicate1, predicate2])
-//        print(searchText)
-        let predicate = NSPredicate(format: "taskName CONTAINS[cd] %@", searchBar.text!)
+        let predicate1 = NSPredicate(format: "categoryName == %@", categoryName)
+        let predicate2 = NSPredicate(format: "taskName CONTAINS[cd] %@", searchText)
+        let predicate = NSCompoundPredicate( andPredicateWithSubpredicates: [predicate1, predicate2])
+        print(searchText)
         let fetchRequest = NSFetchRequest < NSManagedObject > (entityName: "Task")
         fetchRequest.predicate = predicate
         do {
