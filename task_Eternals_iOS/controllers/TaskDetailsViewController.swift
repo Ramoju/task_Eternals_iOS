@@ -117,6 +117,37 @@ self.handleCameraRoll()}))
                     guard let desc = description.text, !desc.isEmpty  else{
                         return
                     }
+                    guard
+                    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+                    else {
+                        return
+                    }
+                    let managedContext = appDelegate.persistentContainer.viewContext
+                    let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Task")
+                      fetchRequest.predicate = NSPredicate(format: "taskName = %@", taskName3)
+                    do {
+                        let results =
+                            try managedContext.fetch(fetchRequest)
+                        let objectUpdate = results[0] as! NSManagedObject
+                        objectUpdate.setValue(cName, forKey: "categoryName")
+                        objectUpdate.setValue(tName, forKey: "taskName")
+                        objectUpdate.setValue(desc, forKey: "taskDescription")
+                        do {
+                            try managedContext.save()
+                            print("Record Updated!")
+             //   To display an alert box
+                                     let alertController = UIAlertController(title: "Message", message: "Task Edited!", preferredStyle: .alert)
+                
+                                     let OKAction = UIAlertAction(title: "OK", style: .default) {
+                                         (action: UIAlertAction!) in
+                                     }
+                                     alertController.addAction(OKAction)
+                                     self.present(alertController, animated: true, completion: nil)
+                        
+                        } catch
+                        let error as NSError {}
+                    } catch
+                    let error as NSError {}
                     
                 }))
                 self.present(alert, animated: true, completion: nil)
