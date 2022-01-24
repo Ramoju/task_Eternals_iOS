@@ -316,11 +316,31 @@ extension TasksListViewController: UITableViewDataSource{
         }else{
 //            let predicate = NSPredicate(format: "taskName CONTAINS[cd] %@", searchBar.text!)
 //            showTasks(predicate: predicate)
-            //showTasksBySearch(searchText: searchText)
+            showTasksBySearch(searchText: searchText)
         }
     }
     
-    
+    func showTasksBySearch( searchText: String){
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+//        let predicate1 = NSPredicate(format: "categoryName == %@", categoryName)
+//        let predicate2 = NSPredicate(format: "taskName CONTAINS[cd] %@", searchText)
+//        let predicate = NSCompoundPredicate( andPredicateWithSubpredicates: [predicate1, predicate2])
+//        print(searchText)
+        let predicate = NSPredicate(format: "taskName CONTAINS[cd] %@", searchBar.text!)
+        let fetchRequest = NSFetchRequest < NSManagedObject > (entityName: "Task")
+        fetchRequest.predicate = predicate
+        do {
+            details =
+            try managedContext.fetch(fetchRequest)
+        } catch
+        let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        tasksTV.reloadData()
+    }
     
     
     
