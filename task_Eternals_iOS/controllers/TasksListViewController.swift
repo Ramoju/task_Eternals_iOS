@@ -36,6 +36,55 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
         tasksTV.reloadData()
     }
     
+    //
+    override func viewDidAppear(_ animated: Bool) {
+        tasksTV.reloadData()
+    }
+    
+    
+    @IBAction func sortByName(_ sender: UIButton) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest < NSManagedObject > (entityName: "Task")
+        let predicate = NSPredicate(format: "categoryName==%@", categoryName)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "taskName", ascending: true)]
+        print(categoryName!)
+        fetchRequest.predicate = predicate
+        do {
+            details =
+            try managedContext.fetch(fetchRequest)
+        } catch
+        let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        tasksTV.reloadData()
+        
+    }
+    
+    
+    
+    @IBAction func sortByDate(_ sender: UIButton) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+            return
+        }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest < NSManagedObject > (entityName: "Task")
+        let predicate = NSPredicate(format: "categoryName==%@", categoryName)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "dueDate", ascending: true)]
+        fetchRequest.predicate = predicate
+        do {
+            details =
+            try managedContext.fetch(fetchRequest)
+        } catch
+        let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        tasksTV.reloadData()
+    }
+    
     
     
     @IBAction func newTask(_ sender: UIButton) {
@@ -181,7 +230,9 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
         tasksTV.reloadData()
     }
     
-    
+    func deleteTasks(task: Tasks) {
+        context.delete(task)
+    }
     
     
     var selectedRow: Int = 0
@@ -197,25 +248,10 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
             destination.status3 = String(describing: cat.value(forKey: "status") ?? "-")
             destination.description3 = String(describing: cat.value(forKey: "taskDescription") ?? "-")
             destination.dueDate3 = String(describing: cat.value(forKey: "dueDate") ?? "-")
-           destination.currentDate3 = String(describing: cat.value(forKey: "startDate") ?? "-")
-            
-          //destination.image3 = UIImage(
-            
-            
-            
+            destination.currentDate3 = String(describing: cat.value(forKey: "startDate") ?? "-")
             
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -225,17 +261,7 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
 extension TasksListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        let cat = details[indexPath.row]
-//       if let vc=storyboard?.instantiateViewController(withIdentifier: "taskslist") as? TasksListViewController{
-//            vc.categoryName = String(describing: cat.value(forKey: "categoryName"))
-//            self.navigationController?.pushViewController(vc, animated: true)
-//       }
-       // self.performSegue(withIdentifier: "taskFullDetails", sender: self)
     }
-    
-    
-    
     
 }
 
@@ -263,14 +289,16 @@ extension TasksListViewController: UITableViewDataSource{
 //            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
 //        }
 //    }
-//
+    
     //to delete row when you swipe
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "delete") { [self] _, _, _ in
             do{
             self.context.delete(self.details[indexPath.row])
                 try self.context.save()
+                tasksTV.reloadData()
                 self.showTasks()
+                tasksTV.reloadData()
             }catch{
                 print(error)
             }
@@ -279,7 +307,7 @@ extension TasksListViewController: UITableViewDataSource{
         let swipe = UISwipeActionsConfiguration(actions: [delete])
         return swipe
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

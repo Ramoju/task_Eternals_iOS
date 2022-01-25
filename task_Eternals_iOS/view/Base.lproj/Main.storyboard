@@ -128,6 +128,33 @@
                                     <outlet property="delegate" destination="wEa-37-XEB" id="MXT-Vp-ib4"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UwA-MC-lmW">
+                                <rect key="frame" x="245.5" y="179" width="59.5" height="31"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="name"/>
+                                <connections>
+                                    <action selector="sortByName:" destination="wEa-37-XEB" eventType="touchUpInside" id="nU0-fa-nM0"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MuZ-Nw-0hy">
+                                <rect key="frame" x="313" y="179" width="81" height="31"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="due date"/>
+                                <connections>
+                                    <action selector="sortByDate:" destination="wEa-37-XEB" eventType="touchUpInside" id="GXV-bC-SzK"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYp-Bu-Bxz">
+                                <rect key="frame" x="176.5" y="179" width="60" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemTealColor"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ChC-e5-JaE"/>
                         <color key="backgroundColor" red="0.85670159290000003" green="0.96611279250000004" blue="0.96426459959999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -135,14 +162,22 @@
                             <constraint firstItem="KP4-h6-Fqa" firstAttribute="leading" secondItem="ChC-e5-JaE" secondAttribute="leading" constant="20" id="3by-hy-2ph"/>
                             <constraint firstItem="ChC-e5-JaE" firstAttribute="trailing" secondItem="lG3-fc-Uot" secondAttribute="trailing" constant="20" id="3hS-5P-w4b"/>
                             <constraint firstItem="KP4-h6-Fqa" firstAttribute="top" secondItem="fAk-bl-oqB" secondAttribute="bottom" constant="20" id="5gO-0l-uw0"/>
+                            <constraint firstItem="MuZ-Nw-0hy" firstAttribute="leading" secondItem="UwA-MC-lmW" secondAttribute="trailing" constant="8" symbolic="YES" id="E3z-sA-jg2"/>
+                            <constraint firstItem="UwA-MC-lmW" firstAttribute="leading" secondItem="VYp-Bu-Bxz" secondAttribute="trailing" constant="9" id="Fxe-c8-mOt"/>
                             <constraint firstItem="ChC-e5-JaE" firstAttribute="bottom" secondItem="KP4-h6-Fqa" secondAttribute="bottom" constant="227" id="GSF-aX-0LW"/>
+                            <constraint firstItem="VYp-Bu-Bxz" firstAttribute="top" secondItem="sT1-Cg-J9H" secondAttribute="bottom" constant="10" id="HCq-n0-GEA"/>
+                            <constraint firstItem="MuZ-Nw-0hy" firstAttribute="top" secondItem="sT1-Cg-J9H" secondAttribute="bottom" constant="10" id="P41-iM-aMI"/>
+                            <constraint firstItem="UwA-MC-lmW" firstAttribute="leading" secondItem="VYp-Bu-Bxz" secondAttribute="trailing" constant="9" id="TAt-3F-jkP"/>
                             <constraint firstItem="fAk-bl-oqB" firstAttribute="top" secondItem="sT1-Cg-J9H" secondAttribute="bottom" constant="27" id="UpS-a9-meD"/>
                             <constraint firstItem="ChC-e5-JaE" firstAttribute="bottom" secondItem="lG3-fc-Uot" secondAttribute="bottom" constant="138" id="Y6K-k4-mcb"/>
                             <constraint firstItem="lG3-fc-Uot" firstAttribute="top" secondItem="KP4-h6-Fqa" secondAttribute="bottom" constant="60" id="aaE-au-wEs"/>
                             <constraint firstItem="fAk-bl-oqB" firstAttribute="leading" secondItem="ChC-e5-JaE" secondAttribute="leading" constant="20" id="cVB-h8-rXJ"/>
                             <constraint firstItem="sT1-Cg-J9H" firstAttribute="leading" secondItem="ChC-e5-JaE" secondAttribute="leading" id="dgg-8P-GZz"/>
+                            <constraint firstItem="KP4-h6-Fqa" firstAttribute="top" secondItem="VYp-Bu-Bxz" secondAttribute="bottom" constant="10" id="dy0-HL-Qh9"/>
+                            <constraint firstItem="UwA-MC-lmW" firstAttribute="top" secondItem="sT1-Cg-J9H" secondAttribute="bottom" constant="10" id="e4z-9J-fhz"/>
                             <constraint firstItem="sT1-Cg-J9H" firstAttribute="trailing" secondItem="ChC-e5-JaE" secondAttribute="trailing" id="p30-Pd-8th"/>
                             <constraint firstItem="ChC-e5-JaE" firstAttribute="trailing" secondItem="KP4-h6-Fqa" secondAttribute="trailing" constant="20" id="x5n-6a-QfW"/>
+                            <constraint firstItem="ChC-e5-JaE" firstAttribute="trailing" secondItem="MuZ-Nw-0hy" secondAttribute="trailing" constant="20" id="xOF-sa-TIn"/>
                             <constraint firstItem="sT1-Cg-J9H" firstAttribute="top" secondItem="ChC-e5-JaE" secondAttribute="top" constant="30" id="zm9-GO-Iy0"/>
                         </constraints>
                     </view>

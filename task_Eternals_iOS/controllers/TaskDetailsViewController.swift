@@ -10,6 +10,7 @@ import UIKit
 
 class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
+    
     var index: Int = 0
     var categoryName3: String!
     var taskName3: String!
@@ -41,6 +42,7 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
         descriptionLb.text = description3
         startDateLb.text = currentDate3
         dueDateLb.text = dueDate3
+        
         // Do any additional setup after loading the view.
     }
     
@@ -135,6 +137,7 @@ self.handleCameraRoll()}))
                         do {
                             try managedContext.save()
                             print("Record Updated!")
+                            
              //   To display an alert box
                                      let alertController = UIAlertController(title: "Message", message: "Task Edited!", preferredStyle: .alert)
                 
