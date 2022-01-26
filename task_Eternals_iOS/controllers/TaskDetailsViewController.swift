@@ -146,11 +146,15 @@ self.handleCameraRoll()}))
                                      }
                                      alertController.addAction(OKAction)
                                      self.present(alertController, animated: true, completion: nil)
+                            
+                            taskNameLb.text = tName
+                            descriptionLb.text = desc
                         
                         } catch
                         let error as NSError {}
                     } catch
                     let error as NSError {}
+                    
                     
                 }))
                 self.present(alert, animated: true, completion: nil)
