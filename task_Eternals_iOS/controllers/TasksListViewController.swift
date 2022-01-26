@@ -274,24 +274,28 @@ extension TasksListViewController: UITableViewDataSource{
     }
     
     // Override to support editing the table view.
-//     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            do{
-//            self.context.delete(self.details[indexPath.row])
-//                try self.context.save()
-//                self.showTasks()
-//            }catch{
-//                print(error)
-//            }
-//            tasksTV.deleteRows(at: [indexPath], with: .fade)
-//
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
-//    }
+   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+       let task = details[indexPath.row]
+       if editingStyle == .delete {
+           
+           context.delete(task as NSManagedObject)
+            details.remove(at: indexPath.row)
+            do{
+            //self.context.delete(self.details[indexPath.row])
+                try self.context.save()
+          //     self.showTasks()
+           }catch{
+               print(error)
+            }
+                tasksTV.deleteRows(at: [indexPath], with: .fade)
+
+       } else if editingStyle == .insert {
+           // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
     
     //to delete row when you swipe
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    /*func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "delete") { [self] _, _, _ in
             do{
             self.context.delete(self.details[indexPath.row])
@@ -306,7 +310,7 @@ extension TasksListViewController: UITableViewDataSource{
         }
         let swipe = UISwipeActionsConfiguration(actions: [delete])
         return swipe
-    }
+    }*/
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
