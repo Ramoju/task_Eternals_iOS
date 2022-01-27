@@ -10,6 +10,12 @@ import UIKit
 
 class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
+    var dateTextField: UITextField?
+    var datePicker = UIDatePicker()
+    let toolBar = UIToolbar()
+    let dateFormatter1 = DateFormatter()
+    let date = Date()
+    var searchController: UISearchController!
     
     var index: Int = 0
     var categoryName3: String!
@@ -127,14 +133,14 @@ self.handleCameraRoll()}))
                     field.keyboardType = .emailAddress
                     field.text = self.description3
                 }
-               
+              alert.addTextField(configurationHandler: dateTextField)
 
                 
                 //adding two buttons to alert
                 alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
                 alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [self] _ in
                     // read the textfields from alert box
-                    guard let fields = alert.textFields, fields.count == 3 else{
+                    guard let fields = alert.textFields, fields.count == 4 else{
                         return
                     }
                     let catName = fields[0]
@@ -149,6 +155,10 @@ self.handleCameraRoll()}))
                     guard let desc = description.text, !desc.isEmpty  else{
                         return
                     }
+                    let dueDate = fields[3]
+                    guard let endDate = dueDate.text else{
+                        return
+                    }
 
                     let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Task")
                       fetchRequest.predicate = NSPredicate(format: "taskName = %@", taskName3)
@@ -159,6 +169,7 @@ self.handleCameraRoll()}))
                         objectUpdate.setValue(cName, forKey: "categoryName")
                         objectUpdate.setValue(tName, forKey: "taskName")
                         objectUpdate.setValue(desc, forKey: "taskDescription")
+                        objectUpdate.setValue(datePicker.date, forKey: "dueDate")
                         do {
                             try managedContext.save()
                             print("Record Updated!")
@@ -171,9 +182,10 @@ self.handleCameraRoll()}))
                                      }
                                      alertController.addAction(OKAction)
                                      self.present(alertController, animated: true, completion: nil)
-                            
+                            categoryNameLb.text = cName
                             taskNameLb.text = tName
                             descriptionLb.text = desc
+                            dueDateLb.text = dateFormatter1.string(from: datePicker.date)
                         
                         } catch
                             let error as NSError {print(error.localizedDescription)}
@@ -185,6 +197,53 @@ self.handleCameraRoll()}))
                 self.present(alert, animated: true, completion: nil)
         
     }
+    
+    func dateTextField(text: UITextField!){
+        dateTextField=text
+        dateFormatter1.dateFormat = "dd/MM/yyyy"
+        dateTextField?.text = dateFormatter1.string(from: date)
+        self.createDatePicker()
+        dateTextField?.inputView = self.datePicker
+        dateTextField?.inputAccessoryView = self.toolBar
+    }
+    
+    func createDatePicker(){
+        //designing the datepicker
+        self.datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 0, height: 200))
+        self.datePicker.backgroundColor = UIColor.lightGray
+        datePicker.datePickerMode = .dateAndTime
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+
+        // Adding Button ToolBar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(TasksListViewController.doneClick))
+        
+        print(doneButton)
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(TasksListViewController.cancelClick))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
+        toolBar.isUserInteractionEnabled = true
+        self.toolBar.isHidden = false
+
+    }
+
+    @objc func doneClick() {
+        dateFormatter1.timeStyle = .none
+        dateFormatter1.dateFormat = "dd/MM/yyyy"
+        dateTextField?.text = dateFormatter1.string(from: datePicker.date)
+        datePicker.isHidden = true
+        self.toolBar.isHidden = true
+    }
+
+    @objc func cancelClick() {
+        datePicker.isHidden = true
+        self.toolBar.isHidden = true
+    }
+    
+
+    // -MARK camera code
     func handleCameraRoll(){
         let image = UIImagePickerController()
                  image.delegate=self

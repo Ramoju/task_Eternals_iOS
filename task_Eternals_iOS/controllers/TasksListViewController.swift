@@ -11,7 +11,9 @@ import CoreData
 class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDisplayDelegate {
 
     //initiating date picker view
-    var datePicker: UIDatePicker = UIDatePicker()
+    /////
+    var dateTextField: UITextField?
+    var datePicker = UIDatePicker()
     let toolBar = UIToolbar()
     let dateFormatter1 = DateFormatter()
     let date = Date()
@@ -102,15 +104,8 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
             field.returnKeyType = .next
             field.keyboardType = .emailAddress
         }
-        //due date text field
-        alert.addTextField { [self] (field) in
-                field.text = eDate
-                self.createDatePicker()
-//              eDate=dateFormatter1.string(from: date)
-                field.inputView = self.datePicker
-                field.inputAccessoryView = self.toolBar
-            }
-        
+        alert.addTextField(configurationHandler: dateTextField)
+            
         //// - TODO SNEHITHA
        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -167,11 +162,19 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
         present(alert, animated: true)
     }
     
+    func dateTextField(text: UITextField!){
+        dateTextField=text
+        dateFormatter1.dateFormat = "dd/MM/yyyy"
+        dateTextField?.text = dateFormatter1.string(from: date)
+        self.createDatePicker()
+        dateTextField?.inputView = self.datePicker
+        dateTextField?.inputAccessoryView = self.toolBar
+    }
     
-    //datepickerview
+//datepickerview
     func createDatePicker(){
         //designing the datepicker
-        self.datePicker = UIDatePicker(frame: CGRect(x: 0, y: 40, width: 270, height: 200))
+        self.datePicker = UIDatePicker(frame: CGRect(x: 0, y: 40, width: 0, height: 200))
         self.datePicker.backgroundColor = UIColor.lightGray
         datePicker.datePickerMode = .dateAndTime
         toolBar.barStyle = .default
@@ -181,25 +184,20 @@ class TasksListViewController: UIViewController, UISearchBarDelegate, UISearchDi
 
         // Adding Button ToolBar
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(TasksListViewController.doneClick))
+        
+        print(doneButton)
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(TasksListViewController.cancelClick))
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: true)
         toolBar.isUserInteractionEnabled = true
-
         self.toolBar.isHidden = false
-        
+
     }
 
-
-    var eDate: String = "00/00/00"
     @objc func doneClick() {
-       // dateFormatter1.dateStyle = .short
         dateFormatter1.timeStyle = .none
-        dateFormatter1.dateFormat = "YY/MM/DD"
-        eDate = dateFormatter1.string(from: datePicker.date)
-        print("here the date is:*****************"+eDate)
-        
-
+        dateFormatter1.dateFormat = "dd/MM/yyyy"
+        dateTextField?.text = dateFormatter1.string(from: datePicker.date)
         datePicker.isHidden = true
         self.toolBar.isHidden = true
     }
