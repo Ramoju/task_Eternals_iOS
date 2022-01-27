@@ -22,7 +22,7 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
     var details:[NSManagedObject] = []
     /// audio??
     
-    
+    let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
     @IBOutlet weak var categoryNameLb: UILabel!
@@ -36,12 +36,24 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var statusBtnLB: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         categoryNameLb.text = categoryName3
         taskNameLb.text = taskName3
         statusLb.text = status3
         descriptionLb.text = description3
         startDateLb.text = currentDate3
         dueDateLb.text = dueDate3
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Task")
+          fetchRequest.predicate = NSPredicate(format: "taskName = %@", taskName3)
+        do {
+            let results = try managedContext.fetch(fetchRequest)
+            let objectUpdate = results[0] as! NSManagedObject
+            if let imagedata = objectUpdate.value(forKey: "image") as? Data{
+            imageView.image = UIImage(data: imagedata)
+            }
+        }catch {
+            print(error.localizedDescription)
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -69,12 +81,6 @@ self.handleCameraRoll()}))
     }
     
     @IBAction func statusClicked(_ sender: UIButton) {
-        guard
-                let appDelegate = UIApplication.shared.delegate as? AppDelegate
-                else {
-                    return
-                }
-                let managedContext = appDelegate.persistentContainer.viewContext
                 let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Task")
                   fetchRequest.predicate = NSPredicate(format: "taskName = %@", taskName3)
                 do {
@@ -143,12 +149,7 @@ self.handleCameraRoll()}))
                     guard let desc = description.text, !desc.isEmpty  else{
                         return
                     }
-                    guard
-                    let appDelegate = UIApplication.shared.delegate as? AppDelegate
-                    else {
-                        return
-                    }
-                    let managedContext = appDelegate.persistentContainer.viewContext
+
                     let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Task")
                       fetchRequest.predicate = NSPredicate(format: "taskName = %@", taskName3)
                     do {
@@ -175,9 +176,9 @@ self.handleCameraRoll()}))
                             descriptionLb.text = desc
                         
                         } catch
-                        let error as NSError {}
+                            let error as NSError {print(error.localizedDescription)}
                     } catch
-                    let error as NSError {}
+                        let error as NSError {print(error.localizedDescription)}
                     
                     
                 }))
@@ -201,7 +202,23 @@ self.handleCameraRoll()}))
                  {
                      imageView.contentMode = .scaleToFill
                      imageView.image=image
-                     
+                     if let png = self.imageView.image?.pngData(){
+                     let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Task")
+                       fetchRequest.predicate = NSPredicate(format: "taskName = %@", taskName3)
+                         do {
+                             let results =
+                                 try managedContext.fetch(fetchRequest)
+                             let objectUpdate = results[0] as! NSManagedObject
+                             objectUpdate.setValue(png, forKey: "image")
+                             do {
+                                 try managedContext.save()
+                             }catch {
+                                 print(error.localizedDescription)
+                             }
+                         } catch {
+                             print(error.localizedDescription)
+                         }
+                     }
                  }
                  
                  self.dismiss(animated: true, completion:nil)
