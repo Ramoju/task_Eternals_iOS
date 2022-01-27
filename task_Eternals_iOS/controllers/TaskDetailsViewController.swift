@@ -69,8 +69,32 @@ self.handleCameraRoll()}))
     }
     
     @IBAction func statusClicked(_ sender: UIButton) {
-        statusLb.text = "Completed"
-        sender.setTitle("Completed", for: .normal)
+        guard
+                let appDelegate = UIApplication.shared.delegate as? AppDelegate
+                else {
+                    return
+                }
+                let managedContext = appDelegate.persistentContainer.viewContext
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Task")
+                  fetchRequest.predicate = NSPredicate(format: "taskName = %@", taskName3)
+                do {
+                    let results =
+                        try managedContext.fetch(fetchRequest)
+                    let objectUpdate = results[0] as! NSManagedObject
+                    objectUpdate.setValue("Completed", forKey: "status")
+                    do {
+                        try managedContext.save()
+                        
+                        statusLb.text = "Completed"
+                    
+                    } catch
+                    let error as NSError {
+                        print(error)
+                    }
+                } catch
+                let error as NSError {
+                    print(error)
+                }
     }
     
     
