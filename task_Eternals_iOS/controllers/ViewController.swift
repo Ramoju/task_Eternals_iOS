@@ -120,7 +120,6 @@ class ViewController: UIViewController {
             let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        
         var i = details.count
         var j = 0
         
@@ -138,23 +137,18 @@ class ViewController: UIViewController {
                     if((object.value(forKey: "status")) as! String == "Open"){
                         statusOpen = true
                         print("true")
-                        details[j].setValue("Open", forKey: "statusIndicator")
+                        details[j].setValue(">", forKey: "statusIndicator")
                     }else{
                         details[j].setValue("✓", forKey: "statusIndicator")
-                        
                     }
-                    
                     k -= 1
                     l += 1
                     
                 }
-                 
-                
             } catch
             let error as NSError {
                 print(error)
             }
-            
             i -= 1
             j += 1
         }
@@ -163,6 +157,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
         showCategories()
+        categoryTv.reloadData()
         
     }
     
@@ -206,6 +201,7 @@ extension ViewController: UITableViewDelegate{
 extension ViewController: UITableViewDataSource{
     
     //to delete row when you swipe
+    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "delete") { [self] _, _, _ in
             do{
@@ -235,6 +231,7 @@ extension ViewController: UITableViewDataSource{
         //cell.textLabel?.text = categories[indexPath.row]
         cell.categoryLabel?.text = String(describing: cat.value(forKey: "categoryName") ?? "-")
         cell.statusLabel?.text = String(describing: cat.value(forKey: "statusIndicator") ?? ">")
+        
         return cell
     }
     
