@@ -21,13 +21,40 @@
                                 <color key="backgroundColor" red="0.85670159290000003" green="0.96611279250000004" blue="0.96426459959999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categories" id="sZI-FO-kyq" customClass="CategoryTableViewCell" customModule="task_Eternals_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="374" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="374" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sZI-FO-kyq" id="5CI-ZN-DSP">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="f4x-U8-ulz">
+                                                    <rect key="frame" x="30" y="11" width="314" height="21"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVa-kj-9Q3" userLabel="categoryLabel">
+                                                            <rect key="frame" x="0.0" y="0.0" width="262.5" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FH6-YK-geZ" userLabel="statusLabel">
+                                                            <rect key="frame" x="272.5" y="0.0" width="41.5" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="f4x-U8-ulz" firstAttribute="top" secondItem="5CI-ZN-DSP" secondAttribute="topMargin" id="Bji-xC-gEz"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="f4x-U8-ulz" secondAttribute="bottom" id="LIV-xp-jl3"/>
+                                                <constraint firstItem="f4x-U8-ulz" firstAttribute="leading" secondItem="5CI-ZN-DSP" secondAttribute="leadingMargin" constant="10" id="Pze-Yu-1du"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="f4x-U8-ulz" secondAttribute="trailing" constant="10" id="Y2G-7i-bao"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="categoryLabel" destination="OVa-kj-9Q3" id="dot-lF-3c6"/>
+                                            <outlet property="statusLabel" destination="FH6-YK-geZ" id="xRh-xP-DhG"/>
                                             <segue destination="wEa-37-XEB" kind="show" identifier="taskslist" id="GgI-as-Wmq"/>
                                         </connections>
                                     </tableViewCell>

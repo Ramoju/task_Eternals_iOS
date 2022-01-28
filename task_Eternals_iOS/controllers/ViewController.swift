@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController {
-
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var categories:[String] = []
     var details:[NSManagedObject] = []
@@ -28,6 +28,8 @@ class ViewController: UIViewController {
         categoryTv.dataSource=self
         showCategories()
         categoryTv.reloadData()
+        
+       
     }
     
     @IBAction func addCategory() {
@@ -89,8 +91,8 @@ class ViewController: UIViewController {
             let error as NSError {
                 print("Could not save. \(error),\(error.userInfo)")
             }
-            
             categoryTv.reloadData()
+            
         }))
         present(alert, animated: true)
     }
@@ -105,8 +107,9 @@ class ViewController: UIViewController {
     
     //fetching data from coredata
     func showCategories(){
-    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
-        return
+        var statusOpen = false
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
+            return
         }
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest < NSManagedObject > (entityName: "Categories")
@@ -114,13 +117,54 @@ class ViewController: UIViewController {
             details =
             try managedContext.fetch(fetchRequest)
         } catch
-        let error as NSError {
+            let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-}
-    
-    
-    
+        
+        var i = details.count
+        var j = 0
+        
+        while(i > 0){
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Task")
+            fetchRequest.predicate = NSPredicate(format: "categoryName = %@", details[j].value(forKey: "categoryName") as! CVarArg)
+            print(details[j].value(forKey: "categoryName") as! CVarArg)
+            do {
+                let results = try managedContext.fetch(fetchRequest)
+                var k = results.count
+                var l = 0
+                
+                while(k > 0) {
+                    let object = results[l] as! NSManagedObject
+                    if((object.value(forKey: "status")) as! String == "Open"){
+                        statusOpen = true
+                        print("true")
+                        details[j].setValue("Open", forKey: "statusIndicator")
+                    }else{
+                        details[j].setValue("✓", forKey: "statusIndicator")
+                        
+                    }
+                    
+                    k -= 1
+                    l += 1
+                    
+                }
+                 
+                
+            } catch
+            let error as NSError {
+                print(error)
+            }
+            
+            i -= 1
+            j += 1
+        }
+        
+    }
+    override func viewWillAppear(_ animated: Bool){
+        super.viewWillAppear(animated)
+        showCategories()
+        
+    }
     
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "taskslist" {
@@ -140,7 +184,7 @@ class ViewController: UIViewController {
             destination.categoryName = String(describing: cat.value(forKey: "categoryName") ?? "-")
         }
     }
-    }
+}
     
   
 
@@ -165,7 +209,7 @@ extension ViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive, title: "delete") { [self] _, _, _ in
             do{
-            self.context.delete(self.details[indexPath.row])
+                self.context.delete(self.details[indexPath.row])
                 try self.context.save()
                 self.showCategories()
             }catch{
@@ -187,12 +231,21 @@ extension ViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cat = details[indexPath.row]
-        let cell = categoryTv.dequeueReusableCell(withIdentifier: "categories", for: indexPath)
+        let cell = categoryTv.dequeueReusableCell(withIdentifier: "categories", for: indexPath) as! CategoryTableViewCell
         //cell.textLabel?.text = categories[indexPath.row]
-        cell.textLabel?.text = String(describing: cat.value(forKey: "categoryName") ?? "-")
+        cell.categoryLabel?.text = String(describing: cat.value(forKey: "categoryName") ?? "-")
+        cell.statusLabel?.text = String(describing: cat.value(forKey: "statusIndicator") ?? ">")
         return cell
     }
     
     
 }
+
+class CategoryTableViewCell: UITableViewCell{
+    
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+   
+}
+
 
