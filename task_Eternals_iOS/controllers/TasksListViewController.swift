@@ -371,6 +371,4 @@ extension TasksListViewController: UITableViewDataSource{
         tasksTV.reloadData()
     }
     
-    
-    
 }

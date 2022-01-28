@@ -107,6 +107,20 @@ self.handleCameraRoll()}))
                 let error as NSError {
                     print(error)
                 }
+        
+//        let fetchRequest2 = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Categories")
+//        fetchRequest2.predicate = NSPredicate(format: "categoryName = %@", categoryName3)
+//        do {
+//            let results =
+//                try managedContext.fetch(fetchRequest2)
+//            let objectUpdate = results[0] as! NSManagedObject
+//            objectUpdate.setValue("✓", forKey: "statusIndicator")
+//            print(objectUpdate.value(forKey: "statusIndicator")!)
+//        } catch
+//        let error as NSError {
+//            print(error)
+//        }
+        
     }
     
     
