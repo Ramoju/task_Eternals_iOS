@@ -307,7 +307,7 @@ self.handleCameraRoll()}))
     }
     func handleAudioRecording(){
         //todo
-
+        self.performSegue(withIdentifier: "audio", sender: self)
     }
     func handleAudioFiles(){
         //todo

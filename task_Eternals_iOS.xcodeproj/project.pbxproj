@@ -19,6 +19,7 @@
 		77093BB9278F7F36008BE710 /* task_Eternals_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77093BB8278F7F36008BE710 /* task_Eternals_iOSTests.swift */; };
 		77093BC3278F7F36008BE710 /* task_Eternals_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77093BC2278F7F36008BE710 /* task_Eternals_iOSUITests.swift */; };
 		77093BC5278F7F36008BE710 /* task_Eternals_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77093BC4278F7F36008BE710 /* task_Eternals_iOSUITestsLaunchTests.swift */; };
+		77252FE327A375410084E9D0 /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77252FE227A375410084E9D0 /* AudioViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		77093BBE278F7F36008BE710 /* task_Eternals_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = task_Eternals_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		77093BC2278F7F36008BE710 /* task_Eternals_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = task_Eternals_iOSUITests.swift; sourceTree = "<group>"; };
 		77093BC4278F7F36008BE710 /* task_Eternals_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = task_Eternals_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		77252FE227A375410084E9D0 /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				3D1593AC27975A52008E0EE6 /* TasksListViewController.swift */,
 				77093BA5278F7F35008BE710 /* ViewController.swift */,
 				3D0AD86A279897FC00BB8EAE /* TaskDetailsViewController.swift */,
+				77252FE227A375410084E9D0 /* AudioViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				3D1593AD27975A52008E0EE6 /* TasksListViewController.swift in Sources */,
 				77093BA2278F7F35008BE710 /* AppDelegate.swift in Sources */,
 				3DCFD2DB279938F70083A22E /* task_Eternals_iOS.xcdatamodeld in Sources */,
+				77252FE327A375410084E9D0 /* AudioViewController.swift in Sources */,
 				77093BA4278F7F35008BE710 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

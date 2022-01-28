@@ -331,6 +331,7 @@
                                         <buttonConfiguration key="configuration" style="plain" image="mic.fill" catalog="system" title="Audio"/>
                                         <connections>
                                             <action selector="btnAudio:" destination="tMH-Fp-TQ7" eventType="touchUpInside" id="23c-yE-rfz"/>
+                                            <segue destination="10s-zQ-ezQ" kind="show" identifier="audio" id="ET6-Xo-i5e"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hpy-qF-xDg">
@@ -425,6 +426,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSl-Zg-4jx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4218.840579710145" y="79.6875"/>
+        </scene>
+        <!--Audio View Controller-->
+        <scene sceneID="167-Fi-4Tx">
+            <objects>
+                <viewController id="10s-zQ-ezQ" customClass="AudioViewController" customModule="task_Eternals_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7aV-MY-4Ra">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m32-UO-iWm">
+                                <rect key="frame" x="147" y="279" width="120" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Record"/>
+                                <connections>
+                                    <action selector="recordACT:" destination="10s-zQ-ezQ" eventType="touchUpInside" id="cnT-bg-0tS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulG-bP-h2z">
+                                <rect key="frame" x="147" y="468" width="120" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Play"/>
+                                <connections>
+                                    <action selector="playACT:" destination="10s-zQ-ezQ" eventType="touchUpInside" id="CAr-SD-Yv8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="zDE-YH-Wi8"/>
+                        <color key="backgroundColor" red="0.7813182918421846" green="1" blue="0.9806998663039096" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="HLo-eZ-fSW"/>
+                    <connections>
+                        <outlet property="playBTNLB" destination="ulG-bP-h2z" id="K5W-7Q-OGF"/>
+                        <outlet property="recordBTNLB" destination="m32-UO-iWm" id="UQd-3F-kE9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="srx-Ro-Edh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4971.0144927536239" y="79.6875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BVF-6W-RcC">
