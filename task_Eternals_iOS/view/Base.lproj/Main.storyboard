@@ -361,14 +361,14 @@
                                             <segue destination="10s-zQ-ezQ" kind="show" identifier="audio" id="ET6-Xo-i5e"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hpy-qF-xDg">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lX3-F1-tjl">
                                         <rect key="frame" x="276" y="0.0" width="138" height="40"/>
                                         <color key="backgroundColor" systemColor="systemTealColor"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Mark Complete"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" title="Edit"/>
                                         <connections>
-                                            <action selector="statusClicked:" destination="tMH-Fp-TQ7" eventType="touchUpInside" id="Tti-M0-8gY"/>
+                                            <action selector="editTaskBtn:" destination="tMH-Fp-TQ7" eventType="touchUpInside" id="nhC-Ry-Evw"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -376,19 +376,21 @@
                                     <constraint firstAttribute="height" constant="40" id="uE6-G2-n8F"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lX3-F1-tjl">
-                                <rect key="frame" x="326.5" y="736" width="67.5" height="31"/>
-                                <color key="backgroundColor" systemColor="systemTealColor"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wTc-h5-MFa">
+                                <rect key="frame" x="112" y="469" width="255.5" height="206"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="206" id="PjP-Bp-cgg"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQP-Vw-mg6">
+                                <rect key="frame" x="251" y="118" width="143" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="pencil" catalog="system" title="Edit"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Task Complete"/>
                                 <connections>
-                                    <action selector="editTaskBtn:" destination="tMH-Fp-TQ7" eventType="touchUpInside" id="nhC-Ry-Evw"/>
+                                    <action selector="statusClicked:" destination="tMH-Fp-TQ7" eventType="touchUpInside" id="Psq-Ko-Hjs"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wTc-h5-MFa">
-                                <rect key="frame" x="90" y="501" width="255.5" height="206"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M0c-au-EhK"/>
                         <color key="backgroundColor" red="0.85670159290000003" green="0.96611279250000004" blue="0.96426459959999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -409,10 +411,8 @@
                             <constraint firstItem="RMC-vq-Hx4" firstAttribute="leading" secondItem="M0c-au-EhK" secondAttribute="leading" id="EgZ-yk-rvw"/>
                             <constraint firstItem="M0c-au-EhK" firstAttribute="bottom" secondItem="RMC-vq-Hx4" secondAttribute="bottom" constant="20" id="F6h-U1-tEG"/>
                             <constraint firstItem="Di7-M2-ric" firstAttribute="top" secondItem="M0c-au-EhK" secondAttribute="top" constant="30" id="H2z-aJ-rOo"/>
-                            <constraint firstItem="M0c-au-EhK" firstAttribute="trailing" secondItem="lX3-F1-tjl" secondAttribute="trailing" constant="20" id="HXS-TT-QAd"/>
                             <constraint firstItem="vta-dO-iu9" firstAttribute="top" secondItem="laa-C1-tfg" secondAttribute="bottom" constant="20" id="K2K-lg-1eZ"/>
                             <constraint firstItem="dYZ-Wq-Cel" firstAttribute="leading" secondItem="M0c-au-EhK" secondAttribute="leading" constant="20" id="LAC-in-Khg"/>
-                            <constraint firstItem="lX3-F1-tjl" firstAttribute="top" secondItem="wTc-h5-MFa" secondAttribute="bottom" constant="29" id="LGN-ns-fD2"/>
                             <constraint firstItem="Jhb-LI-Dp4" firstAttribute="leading" secondItem="M0c-au-EhK" secondAttribute="leading" constant="20" id="LNX-Un-GYz"/>
                             <constraint firstItem="M0c-au-EhK" firstAttribute="trailing" secondItem="wTc-h5-MFa" secondAttribute="trailing" constant="68.5" id="M4m-pL-AbS"/>
                             <constraint firstItem="7jT-EW-lTb" firstAttribute="leading" secondItem="M0c-au-EhK" secondAttribute="leading" constant="20" id="NCj-8I-7io"/>
@@ -425,7 +425,6 @@
                             <constraint firstItem="PnJ-9o-0cM" firstAttribute="top" secondItem="Di7-M2-ric" secondAttribute="bottom" constant="45" id="YYB-gA-l6I"/>
                             <constraint firstItem="Tkp-WM-0Dn" firstAttribute="leading" secondItem="M0c-au-EhK" secondAttribute="leading" constant="20" id="bo0-Fe-Y5d"/>
                             <constraint firstItem="PKS-jk-2ET" firstAttribute="leading" secondItem="M0c-au-EhK" secondAttribute="leading" constant="20" id="cQ2-Fe-b2E"/>
-                            <constraint firstItem="RMC-vq-Hx4" firstAttribute="top" secondItem="lX3-F1-tjl" secondAttribute="bottom" constant="35" id="dAV-ga-kjF"/>
                             <constraint firstItem="1I3-WJ-wVe" firstAttribute="leading" secondItem="M0c-au-EhK" secondAttribute="leading" constant="20" id="dhq-P1-S6A"/>
                             <constraint firstItem="Di7-M2-ric" firstAttribute="leading" secondItem="M0c-au-EhK" secondAttribute="leading" constant="20" id="iPG-O0-q9z"/>
                             <constraint firstItem="vta-dO-iu9" firstAttribute="leading" secondItem="AlX-Uf-feC" secondAttribute="trailing" constant="28.5" id="khO-tu-au7"/>
@@ -445,7 +444,7 @@
                         <outlet property="dueDateLb" destination="vta-dO-iu9" id="fK3-Qc-ooG"/>
                         <outlet property="imageView" destination="wTc-h5-MFa" id="tc1-zz-OuO"/>
                         <outlet property="startDateLb" destination="laa-C1-tfg" id="W7o-f0-zie"/>
-                        <outlet property="statusBtnLB" destination="Hpy-qF-xDg" id="MHf-dl-Dnw"/>
+                        <outlet property="statusBtnLB" destination="eQP-Vw-mg6" id="R2d-H7-xuE"/>
                         <outlet property="statusLb" destination="gbb-QM-sGb" id="x9D-3a-Rj3"/>
                         <outlet property="taskNameLb" destination="PnJ-9o-0cM" id="8LS-4U-e1H"/>
                     </connections>
