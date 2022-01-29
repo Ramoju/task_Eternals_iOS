@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     //creating category array to get the core data variables
     var category = [Categories]()
     
+    var duplicateCategoryCheck = false
+    
     @IBOutlet weak var categoryTv: UITableView!
     
     override func viewDidLoad() {
@@ -70,6 +72,7 @@ class ViewController: UIViewController {
             }
             
             //self.categories.append(name)
+            if duplicateCategoryCheck == false {
             guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{ return }
             let managedContext = appDelegate.persistentContainer.viewContext
             let entity = NSEntityDescription.entity(forEntityName:"Categories", in:managedContext)!
@@ -92,6 +95,7 @@ class ViewController: UIViewController {
                 print("Could not save. \(error),\(error.userInfo)")
             }
             categoryTv.reloadData()
+        }
             
         }))
         present(alert, animated: true)
@@ -99,10 +103,12 @@ class ViewController: UIViewController {
     
     // show alert when the name of the folder is taken
     func showAlertWhenSameName() {
+        duplicateCategoryCheck = true
         let alert = UIAlertController(title: "Name Taken", message: "Please choose another name", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
+        return
     }
     
     //fetching data from coredata
@@ -137,7 +143,7 @@ class ViewController: UIViewController {
                     if((object.value(forKey: "status")) as! String == "Open"){
                         statusOpen = true
                         print("true")
-                        details[j].setValue(">", forKey: "statusIndicator")
+                        details[j].setValue(" ", forKey: "statusIndicator")
                     }else{
                         details[j].setValue("✓", forKey: "statusIndicator")
                     }

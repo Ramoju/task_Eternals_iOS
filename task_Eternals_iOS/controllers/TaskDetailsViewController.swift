@@ -42,7 +42,7 @@ class TaskDetailsViewController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var statusBtnLB: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        audioSlider.isHidden = true
         categoryNameLb.text = categoryName3
         taskNameLb.text = taskName3
         statusLb.text = status3
@@ -107,19 +107,7 @@ self.handleCameraRoll()}))
                 let error as NSError {
                     print(error)
                 }
-        
-//        let fetchRequest2 = NSFetchRequest<NSFetchRequestResult>.init(entityName: "Categories")
-//        fetchRequest2.predicate = NSPredicate(format: "categoryName = %@", categoryName3)
-//        do {
-//            let results =
-//                try managedContext.fetch(fetchRequest2)
-//            let objectUpdate = results[0] as! NSManagedObject
-//            objectUpdate.setValue("✓", forKey: "statusIndicator")
-//            print(objectUpdate.value(forKey: "statusIndicator")!)
-//        } catch
-//        let error as NSError {
-//            print(error)
-//        }
+        sender.isEnabled = false
         
     }
     
@@ -189,13 +177,13 @@ self.handleCameraRoll()}))
                             print("Record Updated!")
                             
              //   To display an alert box
-                                     let alertController = UIAlertController(title: "Message", message: "Task Edited!", preferredStyle: .alert)
-                
-                                     let OKAction = UIAlertAction(title: "OK", style: .default) {
-                                         (action: UIAlertAction!) in
-                                     }
-                                     alertController.addAction(OKAction)
-                                     self.present(alertController, animated: true, completion: nil)
+                             let alertController = UIAlertController(title: "Message", message: "Task Edited!", preferredStyle: .alert)
+        
+                             let OKAction = UIAlertAction(title: "OK", style: .default) {
+                                 (action: UIAlertAction!) in
+                             }
+                             alertController.addAction(OKAction)
+                             self.present(alertController, animated: true, completion: nil)
                             categoryNameLb.text = cName
                             taskNameLb.text = tName
                             descriptionLb.text = desc
@@ -263,7 +251,7 @@ self.handleCameraRoll()}))
                  image.delegate=self
              image.sourceType = UIImagePickerController.SourceType.photoLibrary
              //image.sourceType = UIImagePickerController.SourceType.camera
-                 image.allowsEditing = false
+                 image.allowsEditing = true
                  self.present(image, animated: true)
                  {
                      

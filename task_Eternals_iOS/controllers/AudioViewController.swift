@@ -33,6 +33,7 @@ class AudioViewController: UIViewController, AVAudioPlayerDelegate, AVAudioRecor
         
         func setupRecorder() {
             let audioFilename = getDocumentsDirectory().appendingPathComponent(fileName)
+            print(audioFilename)
             let recordSetting = [ AVFormatIDKey : kAudioFormatAppleLossless,
                                   AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
                                   AVEncoderBitRateKey : 320000,

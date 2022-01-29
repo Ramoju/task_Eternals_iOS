@@ -277,15 +277,15 @@
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" red="0.66994267169999999" green="0.96611279250000004" blue="0.90809226480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKS-jk-2ET">
-                                <rect key="frame" x="20" y="459" width="59" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKS-jk-2ET">
+                                <rect key="frame" x="20" y="459" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" red="0.66994267169999999" green="0.96611279250000004" blue="0.90809226480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tkp-WM-0Dn">
-                                <rect key="frame" x="20" y="504" width="62.5" height="25"/>
+                                <rect key="frame" x="20" y="479" width="62.5" height="25"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -334,7 +334,7 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="4NK-AK-YeP">
-                                <rect key="frame" x="137" y="455" width="118" height="31"/>
+                                <rect key="frame" x="78" y="455" width="177" height="31"/>
                             </slider>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RMC-vq-Hx4">
                                 <rect key="frame" x="0.0" y="802" width="414" height="40"/>
@@ -366,7 +366,7 @@
                                         <color key="backgroundColor" systemColor="systemTealColor"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Tap to Complete"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Mark Complete"/>
                                         <connections>
                                             <action selector="statusClicked:" destination="tMH-Fp-TQ7" eventType="touchUpInside" id="Tti-M0-8gY"/>
                                         </connections>
