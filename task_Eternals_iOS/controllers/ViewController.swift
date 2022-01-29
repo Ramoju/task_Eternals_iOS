@@ -66,7 +66,7 @@ class ViewController: UIViewController {
             
             // for same name for category alert
             for i in 0..<details.count{
-                if name == String(describing: details[i].value(forKey: "categoryName") ?? "_"){
+                if name.lowercased() == String(describing: details[i].value(forKey: "categoryName") ?? "_").lowercased(){
                     self.showAlertWhenSameName()
                 }
             }
